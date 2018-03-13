@@ -43,7 +43,7 @@ h1 {
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
     padding: 32px;
     border-radius: 10px;
-    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+    box-shadow: 0 0 10px 0 rgba(46, 61, 73, 0.5);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -108,36 +108,57 @@ h1 {
     cursor: pointer;
 }
 
-li[data-id=n78d2ps] {
-    border: 4px solid #eb3b5a;
+
+.card[data-id^='n'] {
+    background-color: #ffeaa7;
 }
 
-li[data-id=n8sd1p0] {
-    border: 4px solid #fa8231;
+.card[data-id=n78d2ps] {
+/*    border: 4px solid #eb3b5a;*/
+    background-image: url(../img/icons/apple.png);
+    background-size: contain;
 }
 
-li[data-id=n74dfp6] {
-    border: 4px solid #f7b731;
+.card[data-id=n8sd1p0] {
+/*    border: 4px solid #fa8231;*/
+    background-image: url(../img/icons/banana.png);
+    background-size: contain;
 }
 
-li[data-id=n06d9pa] {
-    border: 4px solid #20bf6b;
+.card[data-id=n74dfp6] {
+/*    border: 4px solid #f7b731;*/
+    background-image: url(../img/icons/cherry.png);
+    background-size: contain;
 }
 
-li[data-id=n5rdmp2] {
-    border: 4px solid #0fb9b1;
+.card[data-id=n06d9pa] {
+/*    border: 4px solid #20bf6b;*/
+    background-image: url(../img/icons/watermelon.png);
+    background-size: contain;
 }
 
-li[data-id=n18dypr] {
-    border: 4px solid #2d98da;
+.card[data-id=n5rdmp2] {
+/*    border: 4px solid #0fb9b1;*/
+    background-image: url(../img/icons/grape.png);
+    background-size: contain;
 }
 
-li[data-id=n6pdipz] {
-    border: 4px solid #3867d6;
+.card[data-id=n18dypr] {
+/*    border: 4px solid #2d98da;*/
+    background-image: url(../img/icons/mango.png);
+    background-size: contain;
 }
 
-li[data-id=n75dnpc] {
-    border: 4px solid #8854d0;
+.card[data-id=n6pdipz] {
+/*    border: 4px solid #3867d6;*/
+    background-image: url(../img/icons/strawberry.png);
+    background-size: contain;
+}
+
+.card[data-id=n75dnpc] {
+/*    border: 4px solid #8854d0;*/
+    background-image: url(../img/icons/orange.png);
+    background-size: contain;
 }
 
 

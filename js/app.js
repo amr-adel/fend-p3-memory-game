@@ -59,8 +59,7 @@ let matched = [];
 function checkMatch(card) {
     if (card.target.tagName == 'LI') {
         if (glance.length == 0 && matched.indexOf(card.target.id) == -1) {
-            card.target.classList.add('match');
-            glance.push(card.target.getAttribute('data-id'), card.target.id);
+            reveal(card);
         } else if (card.target.id === glance[1] || matched.indexOf(card.target.id) != -1) {
             console.log('nope');
         } else {
@@ -72,16 +71,35 @@ function checkMatch(card) {
 }
 
 
+function reveal(card) {
+    card.target.classList.add('match', 'bounceIn');
+    setTimeout(function() {
+        card.target.classList.remove('bounceIn');
+    }, 500);
+    glance.push(card.target.getAttribute('data-id'), card.target.id);
+}
+
+
 function match(card) {
-    card.target.classList.add('match');
+    let revealed = document.getElementById(glance[1]);
+    card.target.classList.add('match', 'flash');
+    revealed.classList.add('flash');
+    setTimeout(function() {
+        revealed.classList.remove('flash');
+        card.target.classList.remove('flash');
+    }, 1000)
     matched.push(card.target.id, glance[1]);
-    console.log("Good!");
 }
 
 
 function noMatch(card) {
-    console.log("Try again");
-    document.getElementById(glance[1]).classList.remove('match');
+    let revealed = document.getElementById(glance[1]);
+    revealed.classList.add('shake');
+    card.target.classList.add('shake');
+    setTimeout(function() {
+        revealed.classList.remove('match', 'shake');
+        card.target.classList.remove('shake');
+    }, 500);
 }
 
 
@@ -89,3 +107,4 @@ function addMove() {
     numberOfMoves++;
     document.getElementById('moves').innerHTML = numberOfMoves;
 }
+
