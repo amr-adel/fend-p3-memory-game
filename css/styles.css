@@ -108,35 +108,35 @@ h1 {
     cursor: pointer;
 }
 
-#n78d2ps {
+li[data-id=n78d2ps] {
     border: 4px solid #eb3b5a;
 }
 
-#n8sd1p0 {
+li[data-id=n8sd1p0] {
     border: 4px solid #fa8231;
 }
 
-#n74dfp6 {
+li[data-id=n74dfp6] {
     border: 4px solid #f7b731;
 }
 
-#n06d9pa {
+li[data-id=n06d9pa] {
     border: 4px solid #20bf6b;
 }
 
-#n5rdmp2 {
+li[data-id=n5rdmp2] {
     border: 4px solid #0fb9b1;
 }
 
-#n18dypr {
+li[data-id=n18dypr] {
     border: 4px solid #2d98da;
 }
 
-#n6pdipz {
+li[data-id=n6pdipz] {
     border: 4px solid #3867d6;
 }
 
-#n75dnpc {
+li[data-id=n75dnpc] {
     border: 4px solid #8854d0;
 }
 

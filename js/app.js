@@ -2,6 +2,16 @@
  * Create a list that holds all of your cards
  */
 
+const cardDataIds = [  'n78d2ps', 'n78d2ps',
+                  'n8sd1p0', 'n8sd1p0',
+                  'n74dfp6', 'n74dfp6',
+                  'n75dnpc', 'n75dnpc',
+                  'n06d9pa', 'n06d9pa',
+                  'n5rdmp2', 'n5rdmp2',
+                  'n18dypr', 'n18dypr',
+                  'n6pdipz', 'n6pdipz'
+                ];
+
 
 /*
  * Display the cards on the page
@@ -26,6 +36,15 @@ function shuffle(array) {
     return array;
 }
 
+function randmize() {
+    let random = shuffle(cardDataIds);
+    var arr = document.getElementById('deck').getElementsByTagName('li');
+    for (let i = 0; i < arr.length; i++) {
+        arr[i].setAttribute('data-id', random[i]);
+    }
+}
+
+document.getElementById('restart').addEventListener('click', randmize);
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -38,29 +57,32 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-//document.getElementById('deck').addEventListener('click', function(card) {
-//    if (card.target.tagName == 'LI') {
-//        card.target.classList.add('match');
-//    }
-//});
+let tempRevealedCard = [];
 
-const cardId = [  'n78d2ps', 'n78d2ps',
-                  'n8sd1p0', 'n8sd1p0',
-                  'n74dfp6', 'n74dfp6',
-                  'n75dnpc', 'n75dnpc',
-                  'n06d9pa', 'n06d9pa',
-                  'n5rdmp2', 'n5rdmp2',
-                  'n18dypr', 'n18dypr',
-                  'n6pdipz', 'n6pdipz'
-                ];
+document.getElementById('deck').addEventListener('click', checkMatch);
 
+function checkMatch(card) {
+    if (card.target.tagName == 'LI') {
+        if (tempRevealedCard.length == 0) {
+            card.target.classList.add('match');
+            tempRevealedCard.push(card.target.getAttribute('data-id'), card.target.id);
+        } else {
+            card.target.getAttribute('data-id') === tempRevealedCard[0] ? match(card) : noMatch(card);
+            tempRevealedCard = [];
+        }
 
-function randmize() {
-    let random = shuffle(cardId);
-    var arr = document.getElementById('deck').getElementsByTagName('li');
-    for (let i = 0; i < arr.length; i++) {
-        arr[i].setAttribute('id', random[i]);
     }
 }
 
-document.getElementById('restart').addEventListener('click', randmize);
+function match(card) {
+    card.target.classList.add('match');
+    console.log("Good!");
+}
+
+function noMatch(card) {
+    console.log("Try again");
+    document.getElementById(tempRevealedCard[1]).classList.remove('match');
+}
+
+
+//            console.log(temp);
