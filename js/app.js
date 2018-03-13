@@ -1,24 +1,14 @@
-/*
- * Create a list that holds all of your cards
- */
+const cardDataIds = [
+    'n78d2ps', 'n78d2ps',
+    'n8sd1p0', 'n8sd1p0',
+    'n74dfp6', 'n74dfp6',
+    'n75dnpc', 'n75dnpc',
+    'n06d9pa', 'n06d9pa',
+    'n5rdmp2', 'n5rdmp2',
+    'n18dypr', 'n18dypr',
+    'n6pdipz', 'n6pdipz'
+];
 
-const cardDataIds = [  'n78d2ps', 'n78d2ps',
-                  'n8sd1p0', 'n8sd1p0',
-                  'n74dfp6', 'n74dfp6',
-                  'n75dnpc', 'n75dnpc',
-                  'n06d9pa', 'n06d9pa',
-                  'n5rdmp2', 'n5rdmp2',
-                  'n18dypr', 'n18dypr',
-                  'n6pdipz', 'n6pdipz'
-                ];
-
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -38,7 +28,7 @@ function shuffle(array) {
 
 function randmize() {
     let random = shuffle(cardDataIds);
-    var arr = document.getElementById('deck').getElementsByTagName('li');
+    const arr = document.getElementById('deck').getElementsByTagName('li');
     for (let i = 0; i < arr.length; i++) {
         arr[i].setAttribute('data-id', random[i]);
     }
@@ -57,33 +47,45 @@ document.getElementById('restart').addEventListener('click', randmize);
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-let tempRevealed = [];
+
 
 document.getElementById('deck').addEventListener('click', checkMatch);
 
+
+let glance = [];
+let numberOfMoves = 0;
+let matched = [];
+
 function checkMatch(card) {
     if (card.target.tagName == 'LI') {
-        if (tempRevealed.length == 0) {
+        if (glance.length == 0 && matched.indexOf(card.target.id) == -1) {
             card.target.classList.add('match');
-            tempRevealed.push(card.target.getAttribute('data-id'), card.target.id);
-        } else if (card.target.id === tempRevealed[1]) {
+            glance.push(card.target.getAttribute('data-id'), card.target.id);
+        } else if (card.target.id === glance[1] || matched.indexOf(card.target.id) != -1) {
+            console.log('nope');
         } else {
-            card.target.getAttribute('data-id') === tempRevealed[0] ? match(card) : noMatch(card);
-            tempRevealed = [];
+            card.target.getAttribute('data-id') === glance[0] ? match(card) : noMatch(card);
+            glance = [];
+            addMove();
         }
-
     }
 }
 
+
 function match(card) {
     card.target.classList.add('match');
+    matched.push(card.target.id, glance[1]);
     console.log("Good!");
 }
 
+
 function noMatch(card) {
     console.log("Try again");
-    document.getElementById(tempRevealed[1]).classList.remove('match');
+    document.getElementById(glance[1]).classList.remove('match');
 }
 
 
-//            console.log(temp);
+function addMove() {
+    numberOfMoves++;
+    document.getElementById('moves').innerHTML = numberOfMoves;
+}
