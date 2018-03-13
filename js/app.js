@@ -57,18 +57,19 @@ document.getElementById('restart').addEventListener('click', randmize);
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-let tempRevealedCard = [];
+let tempRevealed = [];
 
 document.getElementById('deck').addEventListener('click', checkMatch);
 
 function checkMatch(card) {
     if (card.target.tagName == 'LI') {
-        if (tempRevealedCard.length == 0) {
+        if (tempRevealed.length == 0) {
             card.target.classList.add('match');
-            tempRevealedCard.push(card.target.getAttribute('data-id'), card.target.id);
+            tempRevealed.push(card.target.getAttribute('data-id'), card.target.id);
+        } else if (card.target.id === tempRevealed[1]) {
         } else {
-            card.target.getAttribute('data-id') === tempRevealedCard[0] ? match(card) : noMatch(card);
-            tempRevealedCard = [];
+            card.target.getAttribute('data-id') === tempRevealed[0] ? match(card) : noMatch(card);
+            tempRevealed = [];
         }
 
     }
@@ -81,7 +82,7 @@ function match(card) {
 
 function noMatch(card) {
     console.log("Try again");
-    document.getElementById(tempRevealedCard[1]).classList.remove('match');
+    document.getElementById(tempRevealed[1]).classList.remove('match');
 }
 
 
