@@ -12,7 +12,8 @@
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    var currentIndex = array.length,
+        temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -36,3 +37,30 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+//document.getElementById('deck').addEventListener('click', function(card) {
+//    if (card.target.tagName == 'LI') {
+//        card.target.classList.add('match');
+//    }
+//});
+
+const cardId = [  'n78d2ps', 'n78d2ps',
+                  'n8sd1p0', 'n8sd1p0',
+                  'n74dfp6', 'n74dfp6',
+                  'n75dnpc', 'n75dnpc',
+                  'n06d9pa', 'n06d9pa',
+                  'n5rdmp2', 'n5rdmp2',
+                  'n18dypr', 'n18dypr',
+                  'n6pdipz', 'n6pdipz'
+                ];
+
+
+function randmize() {
+    let random = shuffle(cardId);
+    var arr = document.getElementById('deck').getElementsByTagName('li');
+    for (let i = 0; i < arr.length; i++) {
+        arr[i].setAttribute('id', random[i]);
+    }
+}
+
+document.getElementById('restart').addEventListener('click', randmize);
