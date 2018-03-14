@@ -72,9 +72,9 @@ function checkMatch(card) {
 
 
 function reveal(card) {
-    card.target.classList.add('match', 'bounceIn');
+    card.target.classList.add('match', 'fadeIn');
     setTimeout(function() {
-        card.target.classList.remove('bounceIn');
+        card.target.classList.remove('fadeIn');
     }, 500);
     glance.push(card.target.getAttribute('data-id'), card.target.id);
 }
@@ -82,24 +82,30 @@ function reveal(card) {
 
 function match(card) {
     let revealed = document.getElementById(glance[1]);
-    card.target.classList.add('match', 'flash');
-    revealed.classList.add('flash');
+    card.target.classList.add('match');
     setTimeout(function() {
-        revealed.classList.remove('flash');
-        card.target.classList.remove('flash');
-    }, 1000)
+        card.target.classList.add('tada');
+        revealed.classList.add('tada');
+        setTimeout(function() {
+            revealed.classList.remove('tada');
+            card.target.classList.remove('tada');
+        }, 1000)
+    }, 400);
     matched.push(card.target.id, glance[1]);
 }
 
 
 function noMatch(card) {
     let revealed = document.getElementById(glance[1]);
-    revealed.classList.add('shake');
-    card.target.classList.add('shake');
+    card.target.classList.add('match');
     setTimeout(function() {
-        revealed.classList.remove('match', 'shake');
-        card.target.classList.remove('shake');
-    }, 500);
+        revealed.classList.add('shake');
+        card.target.classList.add('shake');
+        setTimeout(function() {
+            revealed.classList.remove('match', 'shake');
+            card.target.classList.remove('match', 'shake');
+        }, 500);
+    }, 400);
 }
 
 
