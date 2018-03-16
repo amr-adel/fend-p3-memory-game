@@ -57,7 +57,7 @@ h1 {
     background: #2e3d49;
     font-size: 0;
     color: #ffffff;
-    border-radius: 8px;
+    border-radius: 800px;
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -170,4 +170,21 @@ h1 {
 .match.card:after {
 /*    height: 5px;*/
     transform: scale(1, 0);
+}
+
+
+/* =================================================================== */
+
+body {
+    position: relative;
+}
+
+.win {
+    display: none;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    background-color: rgba(0,0,0, 0.7);
+    z-index: 10;
 }

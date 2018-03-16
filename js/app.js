@@ -34,7 +34,22 @@ function randmize() {
     }
 }
 
-document.getElementById('restart').addEventListener('click', randmize);
+randmize();
+
+document.getElementById('restart').addEventListener('click', reset);
+
+function reset() {
+    glance = [];
+    numberOfMoves = 0;
+    document.getElementById('moves').innerHTML = numberOfMoves;
+    matched = [];
+    const arr = document.getElementById('deck').getElementsByTagName('li');
+    for (let i = 0; i < arr.length; i++) {
+        arr[i].setAttribute('class', 'card animated');
+    }
+    randmize();
+}
+
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -90,8 +105,11 @@ function match(card) {
             revealed.classList.remove('tada');
             card.target.classList.remove('tada');
         }, 1000)
-    }, 400);
+    }, 300);
     matched.push(card.target.id, glance[1]);
+    if (matched.length == 16) {
+        setTimeout(winner, 1400)
+    }
 }
 
 
@@ -114,3 +132,9 @@ function addMove() {
     document.getElementById('moves').innerHTML = numberOfMoves;
 }
 
+function winner() {
+    const matchesNumber = 2;
+    const win = document.getElementById('win');
+    win.style.display = 'block';
+    win.classList.add('tada');
+}
