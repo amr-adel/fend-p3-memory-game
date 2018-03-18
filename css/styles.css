@@ -336,7 +336,7 @@ body {
     .cards {
         width: 100vw;
         height: 90vw;
-        padding: 24px 10vw 62px;
+        padding: 10vw;
     }
     
     .footer {
@@ -350,8 +350,8 @@ body {
     .cards {
         width: 100vw;
         height: 100vw;
-        padding: 0 2vw;
-        margin: 8vh 0 62px;
+        padding: 2vw 2vw;
+        margin-bottom: 62px;
     }
     
     .card {
@@ -361,8 +361,7 @@ body {
         box-shadow: 0px 1px 3px 0 rgba(46, 61, 73, 0.5);
     }
     
-    .card:hover,
-    .card:focus {
-        box-shadow: 0px 3px 8px 0 rgba(46, 61, 73, 0.5);
+    .card:hover {
+        box-shadow: 0px 1px 3px 0 rgba(46, 61, 73, 0.5);
     }
 }
