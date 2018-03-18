@@ -1,87 +1,187 @@
-html {
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
+    --green-light: #38b878;
+    --green-dark: #1c9956;
+    --red-light: #e44161;
+    --red-dark: #bd365b;
+    --orange-light: #fad93f;
+    --orange-dark: #faad23;
+    --black: #434647;
+    --white: #fefefe;
 }
 
-*,
-*::before,
-*::after {
-    box-sizing: inherit;
+li {
+    list-style: none;
 }
 
 html,
 body {
     width: 100%;
     height: 100%;
-    margin: 0;
-    padding: 0;
 }
 
 body {
     background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
-    font-family: 'Coda', cursive;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 700;
+    text-align: center;
 }
 
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+.sidebar {
+    width: 300px;
+    background-color: var(--green-light);
+    height: 100%;
+    position: relative;
+    border-right: 3px solid var(--black);
+    float: left;    
 }
 
-h1 {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
+.brand {
+    height: 25%;
+    width: 100%;
+    background-color: var(--red-light);
+    border-top: 10px solid var(--red-dark);
+    border-bottom: 3px solid var(--black);
+    padding: 10px;
+    position: relative;
 }
+
+.logo {
+    width: calc(100% - 20px);
+    text-transform: uppercase;
+    font-size: 32px;
+    letter-spacing: 3px;
+    color: var(--white);
+    text-shadow: 1px 2px 0 var(--red-dark);
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 20px;
+}
+
+.logo span {
+    color: var(--orange-dark);
+}
+
+.state {
+    border-bottom: 10px solid var(--green-dark);
+    width: 100%;
+    position: absolute;
+    bottom: 48px;
+    padding: 10px 10px 25px;
+    color: white;
+    font-size: 24px;
+    letter-spacing: 3px;
+    text-shadow: 1px 2px 0 var(--green-dark);
+}
+
+.score span {
+    color: var(--black);
+}
+
+.stars {
+    color: var(--orange-light);
+    font-size: 20px;
+    letter-spacing: 1px;
+    margin-top: 6px;
+    cursor: default;
+}
+
+.empty {
+    color: var(--green-dark);
+    text-shadow: none;
+}
+
+.footer {
+    width: 300px;
+    height: 48px;
+    background-color: var(--black);
+    position: absolute;
+    bottom: 0;
+}
+
+.footer__follow {
+    position: absolute;
+    bottom: 10px;
+    left: calc(50% - 100px);
+    width: 200px;
+    text-align: center;
+    cursor: default;
+}
+
+.footer__follow a {
+    display: inline-block;
+    height: 18px;
+    width: 18px;
+    font-size: 20px;
+    fill: var(--green-dark);
+    margin: 7px;
+}
+
+.footer__follow a:last-child {
+    width: 24px;
+    margin-left: 2px;
+}
+
+.footer__follow a:hover {
+    fill: var(--green-light);
+}
+
+
+.cards {
+    float: right;
+    width: calc(100% - 300px);
+    height: 100vh;
+    padding: 5vh 10vw;
+}
+
 
 /*
  * Styles for the deck of cards
  */
 
 .deck {
-    width: 660px;
-    min-height: 680px;
-    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
-    padding: 32px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px 0 rgba(46, 61, 73, 0.5);
+    height: 100%;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    margin: 0 0 3em;
 }
 
 .card {
-    height: 125px;
-    width: 125px;
-    background: #2e3d49;
-    font-size: 0;
-    color: #ffffff;
-    border-radius: 800px;
+    height: 21%;
+    width: 21%;
+    border-radius: 20px;
     cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+    box-shadow: 0px 2px 5px 0 rgba(46, 61, 73, 0.5);
     position: relative;
-    overflow: hidden;
+    transition: box-shadow .2s ease-out;
 }
 
-.deck .card.match {
+.card:hover {
+    box-shadow: 0 5px 20px 0 rgba(46, 61, 73, 0.5);
+}
+
+.match {
     cursor: default;
-/*
-    background: #02ccba;
-    font-size: 33px;
-*/
+/*    opacity: .8;*/
+}
+
+.match:hover {
+    box-shadow: 0px 2px 5px 0 rgba(46, 61, 73, 0.5);
 }
 
 /* ==============================================================*/
 
 .card[data-id^='n'] {
-    background-color: #ffeaa7;
-    background-size: 80%;
+    background: var(--white);
+    background-size: 8%;
     background-repeat: no-repeat;
     background-position: center;
+    border: 10px solid var(--white) !important;
+    background-size: contain;
 }
 
 
@@ -159,17 +259,17 @@ h1 {
 .card:after {
     content: "";
     position: absolute;
-    width: 150%;
-    height: 150%;
-    border-radius: 50%;
-    background-color: aliceblue;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: var(--white);
     z-index: 5;
     transition: transform 0.2s ease-out;
 }
 
 .match.card:after {
-/*    height: 5px;*/
-    transform: scale(1, 0);
+    transform: scale(.8, 0);
 }
 
 
@@ -187,4 +287,82 @@ body {
     top: 0;
     background-color: rgba(0,0,0, 0.7);
     z-index: 10;
+}
+
+@media screen and (min-width: 1367px) {
+    .cards {
+        padding: 10vh 17vw;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .cards {
+        padding: 5vh 5vw;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        border: none;
+    }
+    
+    .brand {
+        height: 62px;
+        border-top: 5px solid var(--red-dark);
+        border-bottom: 2px solid var(--black);
+        position: relative;
+    }
+
+    .logo {
+        margin-bottom: 10px;
+    }
+    
+    .state {
+        position: relative;
+        bottom: 0px;
+        padding: 5px 2px 10px;
+        font-size: 18px;
+        border-bottom-width: 5px;
+    }
+    
+    .score {
+        display: inline-block;
+        width: 31vw;
+        min-width: 150px;
+    }
+    
+    .cards {
+        width: 100vw;
+        height: 90vw;
+        padding: 24px 10vw 62px;
+    }
+    
+    .footer {
+        width: 100%;
+        position: fixed;
+        z-index: 9;
+    }
+}
+
+@media screen and (max-width: 414px) {
+    .cards {
+        width: 100vw;
+        height: 100vw;
+        padding: 0 2vw;
+        margin: 8vh 0 62px;
+    }
+    
+    .card {
+        height: 23%;
+        width: 23%;
+        border-radius: 10px;
+        box-shadow: 0px 1px 3px 0 rgba(46, 61, 73, 0.5);
+    }
+    
+    .card:hover,
+    .card:focus {
+        box-shadow: 0px 3px 8px 0 rgba(46, 61, 73, 0.5);
+    }
 }
