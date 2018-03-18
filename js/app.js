@@ -1,3 +1,4 @@
+
 const cardDataIds = [
     'n78d2ps', 'n78d2ps',
     'n8sd1p0', 'n8sd1p0',
@@ -36,7 +37,7 @@ function randmize() {
 
 randmize();
 
-document.getElementById('restart').addEventListener('click', reset);
+//document.getElementById('restart').addEventListener('click', reset);
 
 function reset() {
     glance = [];
@@ -61,6 +62,7 @@ function reset() {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
 
 
 
@@ -135,6 +137,30 @@ function addMove() {
 function winner() {
     const matchesNumber = 2;
     const win = document.getElementById('win');
-    win.style.display = 'block';
+//    win.style.display = 'block';
     win.classList.add('tada');
+}
+
+
+
+const gameTime = {
+    timer:"",
+    start: function() {
+        let seconds = 0;
+        let minutes = 0;
+        function clock() {
+            if (seconds == 59) {
+                seconds = 0;
+                minutes++
+            } else {
+                seconds++;
+            }
+            let time = minutes + ":" + (seconds < 10 ? "0" + seconds : seconds);
+            document.getElementById('time').innerHTML = time;
+        }
+        timer = setInterval(clock, 1000);
+    },
+    stop: function() {
+        clearInterval(timer);
+    }
 }
