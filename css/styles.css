@@ -76,22 +76,169 @@ body {
     text-shadow: 1px 2px 0 var(--green-dark);
 }
 
+.restart, .restart:visited {
+    width: 30px;
+    background: none;
+    border: none;
+    outline: none;
+    fill: var(--white);
+    filter: drop-shadow(1px 2px 0 var(--green-dark));
+    cursor: pointer;
+    transition: fill .2s ease-out, filter .2s ease-out;
+}
+
+.restart:hover {
+    fill: var(--red-light);
+    filter: drop-shadow(1px 2px 1px var(--green-dark));    
+}
+
 .score span {
     color: var(--black);
 }
 
-.stars {
-    color: var(--orange-light);
-    font-size: 20px;
-    letter-spacing: 1px;
-    margin-top: 6px;
-    cursor: default;
+.stars svg{
+    fill: var(--orange-light);
+    height: 20px;
+    filter: drop-shadow(1px 2px 0 var(--green-dark));
+    margin-top: 10px;
+
 }
 
-.empty {
-    color: var(--green-dark);
-    text-shadow: none;
+svg.empty {
+    fill: var(--green-dark);
+    filter: none;
 }
+
+
+.cards {
+    float: right;
+    width: calc(100% - 300px);
+    height: 100vh;
+    padding: 5vh 10vw;
+}
+
+
+/*
+ * Styles for the deck of cards
+ */
+
+.deck {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card {
+    height: 21%;
+    width: 21%;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0px 2px 5px 0 rgba(46, 61, 73, 0.5);
+    position: relative;
+    transition: box-shadow .2s ease-out;
+}
+
+.card:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: var(--white);
+    z-index: 5;
+    transition: transform 0.2s ease-out;
+}
+
+.card:hover {
+    box-shadow: 0 5px 20px 0 rgba(46, 61, 73, 0.5);
+}
+
+.match {
+    cursor: default;
+/*    opacity: .8;*/
+}
+
+.match:hover {
+    box-shadow: 0px 2px 5px 0 rgba(46, 61, 73, 0.5);
+}
+
+.match.card:after {
+    transform: scale(.8, 0);
+}
+
+
+/* ============================================================== */
+
+/* Fruity icons by AomAm https://iconscout.com/icon-pack/fruity */
+
+.card[data-id^='n'] {
+    background: var(--white);
+    background-size: 8%;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 10px solid var(--white) !important;
+    background-size: contain;
+}
+
+
+.card[data-id=n78d2ps] {
+    border: 4px solid #eb3b5a;
+    background-image: url(../img/icons/apple.png);
+}
+
+.card[data-id=n8sd1p0] {
+    border: 4px solid #fa8231;
+    background-image: url(../img/icons/banana.png);
+}
+
+.card[data-id=n74dfp6] {
+    border: 4px solid #f7b731;
+    background-image: url(../img/icons/cherry.png);
+}
+
+.card[data-id=n06d9pa] {
+    border: 4px solid #20bf6b;
+    background-image: url(../img/icons/kiwi.png);
+}
+
+.card[data-id=n5rdmp2] {
+    border: 4px solid #0fb9b1;
+    background-image: url(../img/icons/grape.png);
+}
+
+.card[data-id=n18dypr] {
+    border: 4px solid #2d98da;
+    background-image: url(../img/icons/mango.png);
+}
+
+.card[data-id=n6pdipz] {
+    border: 4px solid #3867d6;
+    background-image: url(../img/icons/strawberry.png);
+}
+
+.card[data-id=n75dnpc] {
+    border: 4px solid #8854d0;
+    background-image: url(../img/icons/orange.png);
+}
+
+
+/* =================================================================== */
+
+.win {
+    display: none;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    background-color: rgba(0,0,0, 0.7);
+    z-index: 10;
+}
+
+/* =================================================================== */
 
 .footer {
     width: 300px;
@@ -128,166 +275,7 @@ body {
     fill: var(--green-light);
 }
 
-
-.cards {
-    float: right;
-    width: calc(100% - 300px);
-    height: 100vh;
-    padding: 5vh 10vw;
-}
-
-
-/*
- * Styles for the deck of cards
- */
-
-.deck {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.card {
-    height: 21%;
-    width: 21%;
-    border-radius: 20px;
-    cursor: pointer;
-    box-shadow: 0px 2px 5px 0 rgba(46, 61, 73, 0.5);
-    position: relative;
-    transition: box-shadow .2s ease-out;
-}
-
-.card:hover {
-    box-shadow: 0 5px 20px 0 rgba(46, 61, 73, 0.5);
-}
-
-.match {
-    cursor: default;
-/*    opacity: .8;*/
-}
-
-.match:hover {
-    box-shadow: 0px 2px 5px 0 rgba(46, 61, 73, 0.5);
-}
-
-/* ==============================================================*/
-
-.card[data-id^='n'] {
-    background: var(--white);
-    background-size: 8%;
-    background-repeat: no-repeat;
-    background-position: center;
-    border: 10px solid var(--white) !important;
-    background-size: contain;
-}
-
-
-.card[data-id=n78d2ps] {
-    border: 4px solid #eb3b5a;
-    background-image: url(../img/icons/apple.png);
-}
-
-.card[data-id=n8sd1p0] {
-    border: 4px solid #fa8231;
-    background-image: url(../img/icons/banana.png);
-}
-
-.card[data-id=n74dfp6] {
-    border: 4px solid #f7b731;
-    background-image: url(../img/icons/cherry.png);
-}
-
-.card[data-id=n06d9pa] {
-    border: 4px solid #20bf6b;
-    background-image: url(../img/icons/watermelon.png);
-}
-
-.card[data-id=n5rdmp2] {
-    border: 4px solid #0fb9b1;
-    background-image: url(../img/icons/grape.png);
-}
-
-.card[data-id=n18dypr] {
-    border: 4px solid #2d98da;
-    background-image: url(../img/icons/mango.png);
-}
-
-.card[data-id=n6pdipz] {
-    border: 4px solid #3867d6;
-    background-image: url(../img/icons/strawberry.png);
-}
-
-.card[data-id=n75dnpc] {
-    border: 4px solid #8854d0;
-    background-image: url(../img/icons/orange.png);
-}
-
-/*===================================================================
-
-/*
- * Styles for the Score Panel
- */
-
-.score-panel {
-    text-align: left;
-    width: 345px;
-    margin-bottom: 10px;
-}
-
-.score-panel .stars {
-    margin: 0;
-    padding: 0;
-    display: inline-block;
-    margin: 0 5px 0 0;
-}
-
-.score-panel .stars li {
-    list-style: none;
-    display: inline-block;
-}
-
-.score-panel .restart {
-    float: right;
-    cursor: pointer;
-}
-
-
-
-.card:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background-color: var(--white);
-    z-index: 5;
-    transition: transform 0.2s ease-out;
-}
-
-.match.card:after {
-    transform: scale(.8, 0);
-}
-
-
 /* =================================================================== */
-
-body {
-    position: relative;
-}
-
-.win {
-    display: none;
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    background-color: rgba(0,0,0, 0.7);
-    z-index: 10;
-}
 
 @media screen and (min-width: 1367px) {
     .cards {
@@ -295,11 +283,13 @@ body {
     }
 }
 
+
 @media screen and (max-width: 1024px) {
     .cards {
         padding: 5vh 5vw;
     }
 }
+
 
 @media screen and (max-width: 800px) {
     .sidebar {
@@ -329,8 +319,25 @@ body {
     
     .score {
         display: inline-block;
-        width: 31vw;
+        vertical-align: middle;
+        width: 25vw;
         min-width: 150px;
+/*        background-color: blue;*/
+    }
+    
+    .score:first-child {
+        min-width: 30px;
+        width: 30px;
+        margin: 5px 20px 0;
+    }
+    
+    .stars svg{
+        margin-top: 5px;
+    }
+    
+    .restart:hover {
+        fill: var(--white);
+        filter: drop-shadow(1px 2px 1px var(--green-dark));    
     }
     
     .cards {
@@ -339,12 +346,22 @@ body {
         padding: 10vw;
     }
     
+    .card:hover {
+        box-shadow: 0px 1px 3px 0 rgba(46, 61, 73, 0.5);
+    }
+    
     .footer {
         width: 100%;
         position: fixed;
         z-index: 9;
+        height: 36px;
+    }
+    
+    .footer__follow {
+        bottom: 2px;
     }
 }
+
 
 @media screen and (max-width: 414px) {
     .cards {
@@ -358,10 +375,6 @@ body {
         height: 23%;
         width: 23%;
         border-radius: 10px;
-        box-shadow: 0px 1px 3px 0 rgba(46, 61, 73, 0.5);
-    }
-    
-    .card:hover {
         box-shadow: 0px 1px 3px 0 rgba(46, 61, 73, 0.5);
     }
 }

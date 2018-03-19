@@ -37,11 +37,17 @@ function randmize() {
 
 randmize();
 
-//document.getElementById('restart').addEventListener('click', reset);
+document.getElementById('win').addEventListener('click', restart);
+document.getElementById('restart').addEventListener('click', restart);
 
-function reset() {
+function restart() {
     glance = [];
     numberOfMoves = 0;
+    starRating.reset();
+    starRating.number = 5;
+    gameTime.stop();
+    timerState = false;
+    document.getElementById('time').innerHTML = '0:00';
     document.getElementById('moves').innerHTML = numberOfMoves;
     matched = [];
     const arr = document.getElementById('deck').getElementsByTagName('li');
@@ -49,21 +55,8 @@ function reset() {
         arr[i].setAttribute('class', 'card animated');
     }
     randmize();
+    document.getElementById('win').style.display = 'none';
 }
-
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
-
-
 
 
 document.getElementById('deck').addEventListener('click', checkMatch);
@@ -72,9 +65,14 @@ document.getElementById('deck').addEventListener('click', checkMatch);
 let glance = [];
 let numberOfMoves = 0;
 let matched = [];
+let timerState = false;
 
 function checkMatch(card) {
     if (card.target.tagName == 'LI') {
+        if (!timerState) {
+            gameTime.start();
+            timerState = true;
+        }
         if (glance.length == 0 && matched.indexOf(card.target.id) == -1) {
             reveal(card);
         } else if (card.target.id === glance[1] || matched.indexOf(card.target.id) != -1) {
@@ -110,6 +108,7 @@ function match(card) {
     }, 300);
     matched.push(card.target.id, glance[1]);
     if (matched.length == 16) {
+        gameTime.stop();
         setTimeout(winner, 1400)
     }
 }
@@ -134,10 +133,11 @@ function addMove() {
     document.getElementById('moves').innerHTML = numberOfMoves;
 }
 
+
+
 function winner() {
-    const matchesNumber = 2;
     const win = document.getElementById('win');
-//    win.style.display = 'block';
+    win.style.display = 'block';
     win.classList.add('tada');
 }
 
@@ -151,16 +151,37 @@ const gameTime = {
         function clock() {
             if (seconds == 59) {
                 seconds = 0;
-                minutes++
+                minutes++;
             } else {
                 seconds++;
             }
             let time = minutes + ":" + (seconds < 10 ? "0" + seconds : seconds);
             document.getElementById('time').innerHTML = time;
+            if (seconds == 30) {
+                starRating.empty();
+//                emptyStar();
+            }
         }
         timer = setInterval(clock, 1000);
     },
     stop: function() {
         clearInterval(timer);
+    }
+}
+
+
+const starRating = {
+    number: 5,
+    empty: function() {
+           if (starRating.number > 0) {
+        document.getElementById('star' + (starRating.number)).classList.add('empty');
+            starRating.number--;
+        } 
+    },
+    reset: function() {
+        const emptyStars = document.getElementsByClassName('empty');
+        for (let i = 0; i < emptyStars.length;) {
+                emptyStars[i].classList.remove('empty');
+        }
     }
 }
