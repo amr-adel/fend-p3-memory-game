@@ -267,7 +267,7 @@ svg.empty {
     text-shadow: 1px 2px 0 var(--green-dark);
     font-size: 18px;
     letter-spacing: 2px;
-    margin: 24px auto;
+    padding: 24px 10px;
 }
 
 .modal .state {
@@ -409,7 +409,14 @@ svg.empty {
         vertical-align: middle;
         width: 25vw;
         min-width: 150px;
-/*        background-color: blue;*/
+    }
+    
+    .modal .state {
+        padding-top: 20px;
+    }
+    
+    .modal .score {
+        width: 100%;
     }
     
     .score:first-child {
@@ -463,5 +470,23 @@ svg.empty {
         width: 23%;
         border-radius: 10px;
         box-shadow: 0px 1px 3px 0 rgba(46, 61, 73, 0.5);
+    }
+
+    .message {
+        width: 95vw;
+    }
+    
+    .title {
+        font-size: 24px;
+        line-height: 72px;
+    }
+    
+    .stars svg{
+        margin-top: 0;
+    }
+    
+    .play-again {
+        font-size: 20px;
+        line-height: 60px;
     }
 }

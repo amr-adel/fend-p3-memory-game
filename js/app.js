@@ -106,7 +106,7 @@ function match(card) {
         }, 1000)
     }, 300);
     matched.push(card.target.id, glance[1]);
-    if (matched.length == 4) {
+    if (matched.length == 16) {
         setTimeout(gameOver.winner, 1400)
     }
 }
