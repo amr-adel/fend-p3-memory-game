@@ -1,15 +1,17 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>FRUITY MATCH!</title>
     <meta name="description" content="A very FRUITY matching game">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S" crossorigin="anonymous">
+    <link rel="shortcut icon" href="http://www.iconj.com/ico/7/r/7rew63dd67.ico" type="image/x-icon" />
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
     <section class="sidebar">
         <header class="brand">
@@ -17,7 +19,7 @@
                 Fruity<span>Match</span>
             </h1>
         </header>
-        <article class="state">
+        <article class="state" id="state">
             <ul>
                 <li class="score">
                     <button id="restart" class="restart" title="Restart Game!">
@@ -30,16 +32,16 @@
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="star1">
                         <path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"/>
                     </svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"id="star2">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="star2">
                         <path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"/>
                     </svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"id="star3">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="star3">
                         <path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"/>
                     </svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"id="star4">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="star4">
                         <path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"/>
                     </svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"id="star5">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="star5">
                         <path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"/>
                     </svg>
                 </li>
@@ -47,9 +49,9 @@
         </article>
 
     </section>
-    
+
     <section class="cards">
-        
+
         <ul class="deck" id="deck">
             <li class="card animated" id="c01"></li>
             <li class="card animated" id="c02"></li>
@@ -87,33 +89,19 @@
             </a>
         </div>
     </footer>
-    
-    <article class="win animated" id="win"></article>
-    
+
+    <article class="modal animated" id="modal">
+        <article class="message">
+            <h2 class="title" id="modal-title"></h2>
+            <p class="subtitle" id="modal-subtitle"></p>
+            <article class="state" id="modal-state"></article>
+            <h3 class="play-again" id="play-again">
+                Play again!
+            </h3>
+        </article>
+    </article>
+
     <script src="js/app.js"></script>
 </body>
+
 </html>
-
-<!--
-    <div class="container">
-        <header>
-            <h1>Matching Game</h1>
-        </header>
-
-        <section class="score-panel">
-        	<ul class="stars">
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        	</ul>
-
-        	<span class="moves" id="moves">0</span> Moves
-
-            <div class="restart" id="restart">
-        		<i class="fa fa-repeat"></i>
-        	</div>
-        </section>
-
-    </div>
-    
--->

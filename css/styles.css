@@ -70,7 +70,7 @@ body {
     position: absolute;
     bottom: 48px;
     padding: 10px 10px 25px;
-    color: white;
+    color: var(--white);
     font-size: 24px;
     letter-spacing: 3px;
     text-shadow: 1px 2px 0 var(--green-dark);
@@ -228,7 +228,7 @@ svg.empty {
 
 /* =================================================================== */
 
-.win {
+.modal {
     display: none;
     position: fixed;
     width: 100vw;
@@ -238,6 +238,93 @@ svg.empty {
     z-index: 10;
 }
 
+.message {
+    background-color: var(--white);
+    width: 600px;
+    margin: 50vh auto 0;
+    transform: translateY(-50%);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 5px solid var(--white);
+    background-color: var(--green-light);
+    position: relative;
+}
+
+.title,
+.play-again {
+    color: var(--black);
+    border-bottom: 10px solid var(--orange-dark);
+    background-color: var(--orange-light);
+    font-size: 36px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    line-height: 80px;
+    text-shadow: 1px 2px 0 var(--orange-dark);
+}
+
+.subtitle {
+    color: var(--white);
+    text-shadow: 1px 2px 0 var(--green-dark);
+    font-size: 18px;
+    letter-spacing: 2px;
+    margin: 24px auto;
+}
+
+.modal .state {
+    border-bottom: none;
+    position: relative;
+    padding: 72px 10px 0;
+    bottom: 0;
+    color: var(--white);
+    font-size: 24px;
+    letter-spacing: 3px;
+    text-shadow: 1px 2px 0 var(--green-dark);
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.modal li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.modal .restart{
+    display: none;
+    position: absolute;
+    bottom: 0;
+    min-width: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+}
+
+.modal .stars {
+    position: absolute;
+    top: 0;
+    min-width: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+}
+
+.modal .stars svg {
+    height: 30px;
+}
+
+.play-again {
+    font-size: 28px;
+    line-height: 72px;
+    background-color: var(--green-dark);
+    border-bottom: none;
+    color: var(--white);
+    text-shadow: 1px 2px 0 var(--black);
+    cursor: pointer;
+    transition: color .2s ease-out;
+}
+
+.play-again:hover {
+    color: var(--orange-light);
+}
 /* =================================================================== */
 
 .footer {

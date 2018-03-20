@@ -1,4 +1,3 @@
-
 const cardDataIds = [
     'n78d2ps', 'n78d2ps',
     'n8sd1p0', 'n8sd1p0',
@@ -37,7 +36,7 @@ function randmize() {
 
 randmize();
 
-document.getElementById('win').addEventListener('click', restart);
+document.getElementById('play-again').addEventListener('click', restart);
 document.getElementById('restart').addEventListener('click', restart);
 
 function restart() {
@@ -55,7 +54,7 @@ function restart() {
         arr[i].setAttribute('class', 'card animated');
     }
     randmize();
-    document.getElementById('win').style.display = 'none';
+    document.getElementById('modal').style.display = 'none';
 }
 
 
@@ -88,7 +87,7 @@ function checkMatch(card) {
 
 function reveal(card) {
     card.target.classList.add('match', 'fadeIn');
-    setTimeout(function() {
+    setTimeout(function () {
         card.target.classList.remove('fadeIn');
     }, 500);
     glance.push(card.target.getAttribute('data-id'), card.target.id);
@@ -98,18 +97,17 @@ function reveal(card) {
 function match(card) {
     let revealed = document.getElementById(glance[1]);
     card.target.classList.add('match');
-    setTimeout(function() {
+    setTimeout(function () {
         card.target.classList.add('tada');
         revealed.classList.add('tada');
-        setTimeout(function() {
+        setTimeout(function () {
             revealed.classList.remove('tada');
             card.target.classList.remove('tada');
         }, 1000)
     }, 300);
     matched.push(card.target.id, glance[1]);
-    if (matched.length == 16) {
-        gameTime.stop();
-        setTimeout(winner, 1400)
+    if (matched.length == 4) {
+        setTimeout(gameOver.winner, 1400)
     }
 }
 
@@ -117,10 +115,10 @@ function match(card) {
 function noMatch(card) {
     let revealed = document.getElementById(glance[1]);
     card.target.classList.add('match');
-    setTimeout(function() {
+    setTimeout(function () {
         revealed.classList.add('shake');
         card.target.classList.add('shake');
-        setTimeout(function() {
+        setTimeout(function () {
             revealed.classList.remove('match', 'shake');
             card.target.classList.remove('match', 'shake');
         }, 500);
@@ -130,24 +128,44 @@ function noMatch(card) {
 
 function addMove() {
     numberOfMoves++;
+    if (numberOfMoves == 12 || numberOfMoves == 18 || numberOfMoves == 25) {
+        starRating.empty();
+    };
     document.getElementById('moves').innerHTML = numberOfMoves;
 }
 
+const modal =  document.getElementById('modal');
+const state =  document.getElementById('state');
+const modalState =  document.getElementById('modal-state');
+const modalTitle =  document.getElementById('modal-title');
+const modalSubtitle =  document.getElementById('modal-subtitle');
 
-
-function winner() {
-    const win = document.getElementById('win');
-    win.style.display = 'block';
-    win.classList.add('tada');
+const gameOver = {
+    winner: function () {
+        modalTitle.textContent = "Congratulations!";
+        modalSubtitle.textContent = "You matched all fruits";
+        modalState.innerHTML = state.innerHTML;
+        gameTime.stop();
+        modal.style.display = 'block';
+        modal.classList.add('tada');
+    },
+    loser: function () {
+        modalTitle.textContent = "Ooooops!";
+        modalSubtitle.textContent = "You ran out of stars before matching all fruits";
+        modalState.innerHTML = state.innerHTML;
+        gameTime.stop();
+        modal.style.display = 'block';
+        modal.classList.add('tada');
+    }
 }
 
 
-
 const gameTime = {
-    timer:"",
-    start: function() {
+    timer: '',
+    start: function () {
         let seconds = 0;
         let minutes = 0;
+
         function clock() {
             if (seconds == 59) {
                 seconds = 0;
@@ -159,29 +177,29 @@ const gameTime = {
             document.getElementById('time').innerHTML = time;
             if (seconds == 30) {
                 starRating.empty();
-//                emptyStar();
             }
         }
-        timer = setInterval(clock, 1000);
+        gameTime.timer = setInterval(clock, 1000);
     },
-    stop: function() {
-        clearInterval(timer);
+    stop: function () {
+        clearInterval(gameTime.timer);
     }
 }
 
-
 const starRating = {
     number: 5,
-    empty: function() {
-           if (starRating.number > 0) {
-        document.getElementById('star' + (starRating.number)).classList.add('empty');
+    empty: function () {
+        if (starRating.number == 0) {
+            gameOver.loser();
+        } else { 
+            document.getElementById('star' + (starRating.number)).classList.add('empty');
             starRating.number--;
-        } 
+        }
     },
-    reset: function() {
+    reset: function () {
         const emptyStars = document.getElementsByClassName('empty');
         for (let i = 0; i < emptyStars.length;) {
-                emptyStars[i].classList.remove('empty');
+            emptyStars[i].classList.remove('empty');
         }
     }
 }
