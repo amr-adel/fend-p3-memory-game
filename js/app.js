@@ -1,3 +1,4 @@
+// VARIABLES ==================================================================
 const cardDataIds = [
     'n78d2ps', 'n78d2ps',
     'n8sd1p0', 'n8sd1p0',
@@ -9,7 +10,31 @@ const cardDataIds = [
     'n6pdipz', 'n6pdipz'
 ];
 
+let glance = [];
+let matched = [];
+let revealed;
 
+let timeActive = false;
+let moves = 0;
+
+const stateTime = document.getElementById('time');
+const stateMoves = document.getElementById('moves');
+
+const modal =  document.getElementById('modal');
+const state =  document.getElementById('state');
+const modalState =  document.getElementById('modal-state');
+const modalTitle =  document.getElementById('modal-title');
+const modalSubtitle =  document.getElementById('modal-subtitle');
+
+
+// EVENT LISTENERS ==================================================================
+
+document.getElementById('play-again').addEventListener('click', init);
+document.getElementById('restart').addEventListener('click', init);
+document.getElementById('deck').addEventListener('click', check);
+
+
+// SHUFFLE CARDS DATA-ID ==================================================================
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length,
@@ -36,54 +61,51 @@ function randmize() {
 
 randmize();
 
-document.getElementById('play-again').addEventListener('click', restart);
-document.getElementById('restart').addEventListener('click', restart);
 
-function restart() {
+// INITIALIZE NEW GAME ==================================================================
+
+function init() {
     glance = [];
-    numberOfMoves = 0;
+    moves = 0;
     starRating.reset();
-    starRating.number = 5;
     gameTime.stop();
-    timerState = false;
-    document.getElementById('time').innerHTML = '0:00';
-    document.getElementById('moves').innerHTML = numberOfMoves;
+    timeActive = false;
+    stateTime.innerHTML = '0:00';
+    stateMoves.innerHTML = moves;
     matched = [];
     const arr = document.getElementById('deck').getElementsByTagName('li');
     for (let i = 0; i < arr.length; i++) {
         arr[i].setAttribute('class', 'card animated');
     }
     randmize();
-    document.getElementById('modal').style.display = 'none';
+    modal.style.display = 'none';
 }
 
 
-document.getElementById('deck').addEventListener('click', checkMatch);
+// CHECK IF IT'S THE FIRST OR SECOND CARD TO REVEAL ==================================================================
 
-
-let glance = [];
-let numberOfMoves = 0;
-let matched = [];
-let timerState = false;
-
-function checkMatch(card) {
+function check(card) {
     if (card.target.tagName == 'LI') {
-        if (!timerState) {
+        // START TIME COUNTER IF IT WASN'T STARTED YET
+        if (!timeActive) { 
             gameTime.start();
-            timerState = true;
+            timeActive = true;
         }
         if (glance.length == 0 && matched.indexOf(card.target.id) == -1) {
             reveal(card);
         } else if (card.target.id === glance[1] || matched.indexOf(card.target.id) != -1) {
-            console.log('nope');
+            // IGNORE THE CLICK IF THE CARD IS ALREADY MATCHED OR TEMPORARILY REVEALD
         } else {
-            card.target.getAttribute('data-id') === glance[0] ? match(card) : noMatch(card);
+            // CHECK IF THE SECOND CARD MATCH THE FIRST OR NOT
+            card.target.getAttribute('data-id') === glance[0] ? match.positive(card) : match.negative(card);
             glance = [];
             addMove();
         }
     }
 }
 
+
+// REVEAL FIRST CARD ==================================================================
 
 function reveal(card) {
     card.target.classList.add('match', 'fadeIn');
@@ -94,51 +116,52 @@ function reveal(card) {
 }
 
 
-function match(card) {
-    let revealed = document.getElementById(glance[1]);
-    card.target.classList.add('match');
-    setTimeout(function () {
-        card.target.classList.add('tada');
-        revealed.classList.add('tada');
+// MATCHING RESULT FUNCTIONS ==================================================================
+
+const match = {
+    positive: function (card) {
+        card.target.classList.add('match');
+        revealed = document.getElementById(glance[1]);
         setTimeout(function () {
-            revealed.classList.remove('tada');
-            card.target.classList.remove('tada');
-        }, 1000)
-    }, 300);
-    matched.push(card.target.id, glance[1]);
-    if (matched.length == 16) {
-        setTimeout(gameOver.winner, 1400)
+            card.target.classList.add('tada');
+            revealed.classList.add('tada');
+            setTimeout(function () {
+                revealed.classList.remove('tada');
+                card.target.classList.remove('tada');
+            }, 1000)
+        }, 300);
+        matched.push(card.target.id, glance[1]);
+        if (matched.length == 16) {
+            setTimeout(gameOver.winner, 1400)
+        }
+    },
+    negative: function (card) {
+        card.target.classList.add('match');
+        revealed = document.getElementById(glance[1]);
+        setTimeout(function () {
+            revealed.classList.add('shake');
+            card.target.classList.add('shake');
+            setTimeout(function () {
+                revealed.classList.remove('match', 'shake');
+                card.target.classList.remove('match', 'shake');
+            }, 500);
+        }, 400);
     }
 }
 
 
-function noMatch(card) {
-    let revealed = document.getElementById(glance[1]);
-    card.target.classList.add('match');
-    setTimeout(function () {
-        revealed.classList.add('shake');
-        card.target.classList.add('shake');
-        setTimeout(function () {
-            revealed.classList.remove('match', 'shake');
-            card.target.classList.remove('match', 'shake');
-        }, 500);
-    }, 400);
-}
-
+// MOVES COUNTER ==================================================================
 
 function addMove() {
-    numberOfMoves++;
-    if (numberOfMoves == 12 || numberOfMoves == 18 || numberOfMoves == 25) {
-        starRating.empty();
+    moves++;
+    if (moves == 12 || moves == 18 || moves == 25) {
+        starRating.loseOne();
     };
-    document.getElementById('moves').innerHTML = numberOfMoves;
+    stateMoves.innerHTML = moves;
 }
 
-const modal =  document.getElementById('modal');
-const state =  document.getElementById('state');
-const modalState =  document.getElementById('modal-state');
-const modalTitle =  document.getElementById('modal-title');
-const modalSubtitle =  document.getElementById('modal-subtitle');
+
+// GAME OVER WHEN GAME WON OR LOST ==================================================================
 
 const gameOver = {
     winner: function () {
@@ -160,6 +183,8 @@ const gameOver = {
 }
 
 
+// TIME COUNTER ==================================================================
+
 const gameTime = {
     timer: '',
     start: function () {
@@ -174,9 +199,9 @@ const gameTime = {
                 seconds++;
             }
             let time = minutes + ":" + (seconds < 10 ? "0" + seconds : seconds);
-            document.getElementById('time').innerHTML = time;
+            stateTime.innerHTML = time;
             if (seconds == 30) {
-                starRating.empty();
+                starRating.loseOne();
             }
         }
         gameTime.timer = setInterval(clock, 1000);
@@ -186,9 +211,12 @@ const gameTime = {
     }
 }
 
+
+// STAR RATING ==================================================================
+
 const starRating = {
     number: 5,
-    empty: function () {
+    loseOne: function () {
         if (starRating.number == 0) {
             gameOver.loser();
         } else { 
@@ -201,5 +229,6 @@ const starRating = {
         for (let i = 0; i < emptyStars.length;) {
             emptyStars[i].classList.remove('empty');
         }
+        starRating.number = 5;
     }
 }

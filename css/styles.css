@@ -1,3 +1,17 @@
+@charset "UTF-8";
+
+/*!
+ * animate.css -http://daneden.me/animate
+ * Version - 3.6.0
+ * Licensed under the MIT license - http://opensource.org/licenses/MIT
+ *
+ * Copyright (c) 2018 Daniel Eden
+ */
+
+.animated{-webkit-animation-duration:1s;animation-duration:1s;-webkit-animation-fill-mode:both;animation-fill-mode:both}.animated.infinite{-webkit-animation-iteration-count:infinite;animation-iteration-count:infinite}@-webkit-keyframes shake{from,to{-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}10%,30%,50%,70%,90%{-webkit-transform:translate3d(-10px,0,0);transform:translate3d(-10px,0,0)}20%,40%,60%,80%{-webkit-transform:translate3d(10px,0,0);transform:translate3d(10px,0,0)}}@keyframes shake{from,to{-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}10%,30%,50%,70%,90%{-webkit-transform:translate3d(-10px,0,0);transform:translate3d(-10px,0,0)}20%,40%,60%,80%{-webkit-transform:translate3d(10px,0,0);transform:translate3d(10px,0,0)}}.shake{-webkit-animation-name:shake;animation-name:shake}@-webkit-keyframes tada{from,to{-webkit-transform:scale3d(1,1,1);transform:scale3d(1,1,1)}10%,20%{-webkit-transform:scale3d(.9,.9,.9) rotate3d(0,0,1,-3deg);transform:scale3d(.9,.9,.9) rotate3d(0,0,1,-3deg)}30%,50%,70%,90%{-webkit-transform:scale3d(1.1,1.1,1.1) rotate3d(0,0,1,3deg);transform:scale3d(1.1,1.1,1.1) rotate3d(0,0,1,3deg)}40%,60%,80%{-webkit-transform:scale3d(1.1,1.1,1.1) rotate3d(0,0,1,-3deg);transform:scale3d(1.1,1.1,1.1) rotate3d(0,0,1,-3deg)}}@keyframes tada{from,to{-webkit-transform:scale3d(1,1,1);transform:scale3d(1,1,1)}10%,20%{-webkit-transform:scale3d(.9,.9,.9) rotate3d(0,0,1,-3deg);transform:scale3d(.9,.9,.9) rotate3d(0,0,1,-3deg)}30%,50%,70%,90%{-webkit-transform:scale3d(1.1,1.1,1.1) rotate3d(0,0,1,3deg);transform:scale3d(1.1,1.1,1.1) rotate3d(0,0,1,3deg)}40%,60%,80%{-webkit-transform:scale3d(1.1,1.1,1.1) rotate3d(0,0,1,-3deg);transform:scale3d(1.1,1.1,1.1) rotate3d(0,0,1,-3deg)}}.tada{-webkit-animation-name:tada;animation-name:tada}
+
+/* VARIABLES AND RESET ============================================================== */
+
 * {
     margin: 0;
     padding: 0;
@@ -23,11 +37,14 @@ body {
 }
 
 body {
-    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    background: #ffffff url('../img/geometry2.png');
+    /* Background pattern from Subtle Patterns */
     font-family: 'Roboto Slab', serif;
     font-weight: 700;
     text-align: center;
 }
+
+/* SIDEBAR ============================================================== */
 
 .sidebar {
     width: 300px;
@@ -35,7 +52,7 @@ body {
     height: 100%;
     position: relative;
     border-right: 3px solid var(--black);
-    float: left;    
+    float: left;
 }
 
 .brand {
@@ -76,7 +93,8 @@ body {
     text-shadow: 1px 2px 0 var(--green-dark);
 }
 
-.restart, .restart:visited {
+.restart,
+.restart:visited {
     width: 30px;
     background: none;
     border: none;
@@ -89,14 +107,14 @@ body {
 
 .restart:hover {
     fill: var(--red-light);
-    filter: drop-shadow(1px 2px 1px var(--green-dark));    
+    filter: drop-shadow(1px 2px 1px var(--green-dark));
 }
 
 .score span {
     color: var(--black);
 }
 
-.stars svg{
+.stars svg {
     fill: var(--orange-light);
     height: 20px;
     filter: drop-shadow(1px 2px 0 var(--green-dark));
@@ -109,18 +127,14 @@ svg.empty {
     filter: none;
 }
 
+/* CARDS ============================================================== */
 
-.cards {
+.cards-wrap {
     float: right;
     width: calc(100% - 300px);
     height: 100vh;
     padding: 5vh 10vw;
 }
-
-
-/*
- * Styles for the deck of cards
- */
 
 .deck {
     height: 100%;
@@ -159,7 +173,7 @@ svg.empty {
 
 .match {
     cursor: default;
-/*    opacity: .8;*/
+    /*    opacity: .8;*/
 }
 
 .match:hover {
@@ -171,62 +185,62 @@ svg.empty {
 }
 
 
-/* ============================================================== */
+/* FRUITS ============================================================== */
 
 /* Fruity icons by AomAm https://iconscout.com/icon-pack/fruity */
 
 .card[data-id^='n'] {
     background: var(--white);
-    background-size: 8%;
     background-repeat: no-repeat;
     background-position: center;
-    border: 10px solid var(--white) !important;
+    border: 10px solid var(--white);
     background-size: contain;
 }
 
+/* Keeping same border color of pairs to easly identify them when testing */
 
 .card[data-id=n78d2ps] {
-    border: 4px solid #eb3b5a;
+    /*    border: 4px solid #eb3b5a;*/
     background-image: url(../img/icons/apple.png);
 }
 
 .card[data-id=n8sd1p0] {
-    border: 4px solid #fa8231;
+    /*    border: 4px solid #fa8231;*/
     background-image: url(../img/icons/banana.png);
 }
 
 .card[data-id=n74dfp6] {
-    border: 4px solid #f7b731;
+    /*    border: 4px solid #f7b731;*/
     background-image: url(../img/icons/cherry.png);
 }
 
 .card[data-id=n06d9pa] {
-    border: 4px solid #20bf6b;
+    /*    border: 4px solid #20bf6b;*/
     background-image: url(../img/icons/kiwi.png);
 }
 
 .card[data-id=n5rdmp2] {
-    border: 4px solid #0fb9b1;
+    /*    border: 4px solid #0fb9b1;*/
     background-image: url(../img/icons/grape.png);
 }
 
 .card[data-id=n18dypr] {
-    border: 4px solid #2d98da;
+    /*    border: 4px solid #2d98da;*/
     background-image: url(../img/icons/mango.png);
 }
 
 .card[data-id=n6pdipz] {
-    border: 4px solid #3867d6;
+    /*    border: 4px solid #3867d6;*/
     background-image: url(../img/icons/strawberry.png);
 }
 
 .card[data-id=n75dnpc] {
-    border: 4px solid #8854d0;
+    /*    border: 4px solid #8854d0;*/
     background-image: url(../img/icons/orange.png);
 }
 
 
-/* =================================================================== */
+/* MODAL ============================================================== */
 
 .modal {
     display: none;
@@ -234,7 +248,7 @@ svg.empty {
     width: 100vw;
     height: 100vh;
     top: 0;
-    background-color: rgba(0,0,0, 0.7);
+    background-color: rgba(0, 0, 0, 0.7);
     z-index: 10;
 }
 
@@ -288,7 +302,7 @@ svg.empty {
     margin: 0 10px;
 }
 
-.modal .restart{
+.modal .restart {
     display: none;
     position: absolute;
     bottom: 0;
@@ -325,7 +339,8 @@ svg.empty {
 .play-again:hover {
     color: var(--orange-light);
 }
-/* =================================================================== */
+
+/* CREDIT ============================================================== */
 
 .footer {
     width: 300px;
@@ -362,21 +377,23 @@ svg.empty {
     fill: var(--green-light);
 }
 
-/* =================================================================== */
+/* > STANDERD 15.6" LAPTOP ============================================================== */
 
 @media screen and (min-width: 1367px) {
-    .cards {
+    .cards-wrap {
         padding: 10vh 17vw;
     }
 }
 
+/* IPAD LANDSCAPE ============================================================== */
 
 @media screen and (max-width: 1024px) {
-    .cards {
+    .cards-wrap {
         padding: 5vh 5vw;
     }
 }
 
+/* TABLET ============================================================== */
 
 @media screen and (max-width: 800px) {
     .sidebar {
@@ -384,7 +401,7 @@ svg.empty {
         height: auto;
         border: none;
     }
-    
+
     .brand {
         height: 62px;
         border-top: 5px solid var(--red-dark);
@@ -395,7 +412,7 @@ svg.empty {
     .logo {
         margin-bottom: 10px;
     }
-    
+
     .state {
         position: relative;
         bottom: 0px;
@@ -403,68 +420,69 @@ svg.empty {
         font-size: 18px;
         border-bottom-width: 5px;
     }
-    
+
     .score {
         display: inline-block;
         vertical-align: middle;
         width: 25vw;
         min-width: 150px;
     }
-    
+
     .modal .state {
         padding-top: 20px;
     }
-    
+
     .modal .score {
         width: 100%;
     }
-    
+
     .score:first-child {
         min-width: 30px;
         width: 30px;
         margin: 5px 20px 0;
     }
-    
-    .stars svg{
+
+    .stars svg {
         margin-top: 5px;
     }
-    
+
     .restart:hover {
         fill: var(--white);
-        filter: drop-shadow(1px 2px 1px var(--green-dark));    
+        filter: drop-shadow(1px 2px 1px var(--green-dark));
     }
-    
-    .cards {
+
+    .cards-wrap {
         width: 100vw;
         height: 90vw;
         padding: 10vw;
     }
-    
+
     .card:hover {
         box-shadow: 0px 1px 3px 0 rgba(46, 61, 73, 0.5);
     }
-    
+
     .footer {
         width: 100%;
         position: fixed;
         z-index: 9;
         height: 36px;
     }
-    
+
     .footer__follow {
         bottom: 2px;
     }
 }
 
+/* MOBILE ============================================================== */
 
 @media screen and (max-width: 414px) {
-    .cards {
+    .cards-wrap {
         width: 100vw;
         height: 100vw;
         padding: 2vw 2vw;
         margin-bottom: 62px;
     }
-    
+
     .card {
         height: 23%;
         width: 23%;
@@ -475,16 +493,16 @@ svg.empty {
     .message {
         width: 95vw;
     }
-    
+
     .title {
         font-size: 24px;
         line-height: 72px;
     }
-    
-    .stars svg{
+
+    .stars svg {
         margin-top: 0;
     }
-    
+
     .play-again {
         font-size: 20px;
         line-height: 60px;
