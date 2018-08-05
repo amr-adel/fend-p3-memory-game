@@ -1,4 +1,4 @@
-# Fruity Match
+# Memory Game (Fruity Match)
 
 This is my entry for project 3 (*Memory Game*) from Udacity's  [Front-End Nanodegree](https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001) program.
 
@@ -34,4 +34,23 @@ This is my entry for project 3 (*Memory Game*) from Udacity's  [Front-End Nanode
 
 ---
 
-### Try it now [HERE](https://amr-adel.github.io/fend-p3-memory-game/)
+
+### To see it in action
+### Visit live demo
+At [Memory Game (Fruity Match)](https://amr-adel.github.io/fend-p3-memory-game/)
+
+---
+#### Clone repository
+via `HTTPS` 
+```
+https://github.com/amr-adel/fend-p3-memory-game.git
+```
+Or via `SSH` 
+```
+git@github.com:amr-adel/fend-p3-memory-game.git
+```
+
+---
+
+#### Download repository
+As a ZIP archive [Memory Game (Fruity Match)](https://github.com/amr-adel/fend-p3-memory-game/archive/master.zip)
