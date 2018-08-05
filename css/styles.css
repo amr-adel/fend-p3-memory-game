@@ -95,17 +95,22 @@ body {
 
 .restart,
 .restart:visited {
-    width: 30px;
     background: none;
     border: none;
     outline: none;
+    cursor: pointer;
+}
+
+.restart svg,
+.restart:visited svg {
+    width: 30px;
+    height: 30px;
     fill: var(--white);
     filter: drop-shadow(1px 2px 0 var(--green-dark));
-    cursor: pointer;
     transition: fill .2s ease-out, filter .2s ease-out;
 }
 
-.restart:hover {
+.restart:hover svg{
     fill: var(--red-light);
     filter: drop-shadow(1px 2px 1px var(--green-dark));
 }
@@ -117,6 +122,7 @@ body {
 .stars svg {
     fill: var(--orange-light);
     height: 20px;
+    width: 20px;
     filter: drop-shadow(1px 2px 0 var(--green-dark));
     margin-top: 10px;
 
@@ -342,38 +348,36 @@ svg.empty {
 
 /* CREDIT ============================================================== */
 
-.footer {
+.footer__follow {
     width: 300px;
     height: 48px;
     background-color: var(--black);
     position: absolute;
     bottom: 0;
-}
 
-.footer__follow {
-    position: absolute;
-    bottom: 10px;
-    left: calc(50% - 100px);
-    width: 200px;
-    text-align: center;
-    cursor: default;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
 }
 
 .footer__follow a {
-    display: inline-block;
-    height: 18px;
-    width: 18px;
-    font-size: 20px;
+    margin: 10px;
+    text-decoration: none;
+}
+
+.footer__follow svg {
+    width: 20px;
+    height: 20px;
     fill: var(--green-dark);
-    margin: 7px;
+    transition: fill .2s ease-out;
 }
 
-.footer__follow a:last-child {
-    width: 24px;
-    margin-left: 2px;
+.footer__follow a:last-child svg {
+    width: 22px;
+    height: 22px;
 }
 
-.footer__follow a:hover {
+.footer__follow a:hover svg {
     fill: var(--green-light);
 }
 
