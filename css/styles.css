@@ -361,20 +361,15 @@ svg.empty {
 }
 
 .footer__follow a {
-    margin: 10px;
+    margin: 12px;
     text-decoration: none;
 }
 
 .footer__follow svg {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     fill: var(--green-dark);
     transition: fill .2s ease-out;
-}
-
-.footer__follow a:last-child svg {
-    width: 22px;
-    height: 22px;
 }
 
 .footer__follow a:hover svg {
@@ -466,14 +461,19 @@ svg.empty {
     }
 
     .footer {
-        width: 100%;
         position: fixed;
         z-index: 9;
         height: 36px;
+        bottom: 0;
+    }
+    
+    .footer__follow {
+        width: 100vw;
     }
 
-    .footer__follow {
-        bottom: 2px;
+    .footer__follow svg {
+        width: 20px;
+        height: 20px;
     }
 }
 
