@@ -101,7 +101,7 @@
                 // IGNORE THE CLICK IF THE CARD IS ALREADY MATCHED OR TEMPORARILY REVEALD
             } else {
                 // CHECK IF THE SECOND CARD MATCH THE FIRST OR NOT
-                card.target.getAttribute('data-id') === glance[0] ? match.positive(card) : match.negative(card);
+                card.target.getAttribute('data-id') === glance[0] ? match.positive(card.target) : match.negative(card.target);
                 clickable = false;
                 glance = [];
                 addMove();
@@ -122,34 +122,40 @@
 
     const match = {
         positive: function (card) {
-            card.target.classList.add('match');
+            card.classList.add('match');
             revealed = document.getElementById(glance[1]);
             setTimeout(function () {
-                card.target.classList.add('tada');
+                card.classList.add('tada');
                 revealed.classList.add('tada');
-                revealed.addEventListener('animationend', e => {
-                    e.target.classList.remove('tada');
-                    card.target.classList.remove('tada');
+                card.addEventListener('animationend', () => {
+                    revealed.classList.remove('tada');
+                    card.classList.remove('tada');
                     clickable = true;
                 })
             }, 300);
-            matched.push(card.target.id, glance[1]);
+            matched.push(card.id, glance[1]);
             if (matched.length == 16) {
                 setTimeout(gameOver.winner, 1400)
             }
         },
         negative: function (card) {
-            card.target.classList.add('match');
+            card.classList.add('match');
             revealed = document.getElementById(glance[1]);
             setTimeout(function () {
                 revealed.classList.add('shake');
-                card.target.classList.add('shake');
-                revealed.addEventListener('animationend', e => {
-                    e.target.classList.remove('match', 'shake')
-                    card.target.classList.remove('match', 'shake')
-                    clickable = true;
-                })
+                card.classList.add('shake');
+                card.addEventListener('animationend', match.animationendCallback([card, revealed], ['match', 'shake']))
             }, 400);
+        },
+        animationendCallback: function(elements, classes) {
+            for (let elemnet of elements) {
+                for (let eClass of classes) {
+                    elemnet.classList.remove(eClass)
+                }
+            }
+
+            elements[0].removeEventListener('animationend', match.animationendCallback)
+            clickable = true;
         }
     }
 
