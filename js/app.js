@@ -14,6 +14,7 @@
 
     let glance = [];
     let matched = [];
+    let clickable = true;
     let revealed;
 
     let timeActive = false;
@@ -69,6 +70,7 @@
     function init() {
         glance = [];
         moves = 0;
+        clickable = true;
         starRating.reset();
         gameTime.stop();
         timeActive = false;
@@ -87,7 +89,7 @@
 // CHECK IF IT'S THE FIRST OR SECOND CARD TO REVEAL ==================================================================
 
     function check(card) {
-        if (card.target.tagName == 'LI') {
+        if (card.target.tagName == 'LI' && clickable) {
             // START TIME COUNTER IF IT WASN'T STARTED YET
             if (!timeActive) { 
                 gameTime.start();
@@ -100,6 +102,7 @@
             } else {
                 // CHECK IF THE SECOND CARD MATCH THE FIRST OR NOT
                 card.target.getAttribute('data-id') === glance[0] ? match.positive(card) : match.negative(card);
+                clickable = false;
                 glance = [];
                 addMove();
             }
@@ -127,6 +130,7 @@
                 revealed.addEventListener('animationend', e => {
                     e.target.classList.remove('tada');
                     card.target.classList.remove('tada');
+                    clickable = true;
                 })
             }, 300);
             matched.push(card.target.id, glance[1]);
@@ -143,6 +147,7 @@
                 revealed.addEventListener('animationend', e => {
                     e.target.classList.remove('match', 'shake')
                     card.target.classList.remove('match', 'shake')
+                    clickable = true;
                 })
             }, 400);
         }
