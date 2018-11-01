@@ -110,10 +110,7 @@
 // REVEAL FIRST CARD ==================================================================
 
     function reveal(card) {
-        card.target.classList.add('match', 'fadeIn');
-        setTimeout(function () {
-            card.target.classList.remove('fadeIn');
-        }, 500);
+        card.target.classList.add('match');
         glance.push(card.target.getAttribute('data-id'), card.target.id);
     }
 
@@ -127,10 +124,10 @@
             setTimeout(function () {
                 card.target.classList.add('tada');
                 revealed.classList.add('tada');
-                setTimeout(function () {
-                    revealed.classList.remove('tada');
+                revealed.addEventListener('animationend', e => {
+                    e.target.classList.remove('tada');
                     card.target.classList.remove('tada');
-                }, 1000)
+                })
             }, 300);
             matched.push(card.target.id, glance[1]);
             if (matched.length == 16) {
@@ -143,10 +140,10 @@
             setTimeout(function () {
                 revealed.classList.add('shake');
                 card.target.classList.add('shake');
-                setTimeout(function () {
-                    revealed.classList.remove('match', 'shake');
-                    card.target.classList.remove('match', 'shake');
-                }, 500);
+                revealed.addEventListener('animationend', e => {
+                    e.target.classList.remove('match', 'shake')
+                    card.target.classList.remove('match', 'shake')
+                })
             }, 400);
         }
     }
