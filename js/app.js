@@ -15,7 +15,6 @@
     let glance = [];
     let matched = [];
     let clickable = true;
-    let revealed;
 
     let timeActive = false;
     let moves = 0;
@@ -101,10 +100,7 @@
                 // IGNORE THE CLICK IF THE CARD IS ALREADY MATCHED OR TEMPORARILY REVEALD
             } else {
                 // CHECK IF THE SECOND CARD MATCH THE FIRST OR NOT
-                card.target.getAttribute('data-id') === glance[0] ? match.positive(card.target) : match.negative(card.target);
-                clickable = false;
-                glance = [];
-                addMove();
+                match(card.target)
             }
         }
     }
@@ -120,44 +116,50 @@
 
 // MATCHING RESULT FUNCTIONS ==================================================================
 
-    const match = {
-        positive: function (card) {
-            card.classList.add('match');
-            revealed = document.getElementById(glance[1]);
-            setTimeout(function () {
-                card.classList.add('tada');
-                revealed.classList.add('tada');
-                card.addEventListener('animationend', () => {
-                    revealed.classList.remove('tada');
-                    card.classList.remove('tada');
-                    clickable = true;
-                })
-            }, 300);
-            matched.push(card.id, glance[1]);
-            if (matched.length == 16) {
-                setTimeout(gameOver.winner, 1400)
-            }
-        },
-        negative: function (card) {
-            card.classList.add('match');
-            revealed = document.getElementById(glance[1]);
-            setTimeout(function () {
-                revealed.classList.add('shake');
-                card.classList.add('shake');
-                card.addEventListener('animationend', match.animationendCallback([card, revealed], ['match', 'shake']))
-            }, 400);
-        },
-        animationendCallback: function(elements, classes) {
-            for (let elemnet of elements) {
-                for (let eClass of classes) {
-                    elemnet.classList.remove(eClass)
-                }
-            }
+function match(card) {
+    let revealed = document.getElementById(glance[1]);
 
-            elements[0].removeEventListener('animationend', match.animationendCallback)
-            clickable = true;
+    let positiveMatch = card.getAttribute('data-id') === glance[0] ? true : false;
+
+    function animationendCallback() {
+        card.removeEventListener('animationend', animationendCallback)
+        for (let element of [card, revealed]) {
+            for (let rClass of (positiveMatch ? ['tada'] : ['shake', 'match'])) {
+                element.classList.remove(rClass);
+            }
         }
+
+        clickable = true;
     }
+
+    if (positiveMatch) {
+        // POSITIVE MATCH
+        card.classList.add('match');
+
+        setTimeout(function () {
+            card.classList.add('tada');
+            revealed.classList.add('tada');
+            card.addEventListener('animationend', animationendCallback)
+        }, 300);
+        matched.push(card.id, glance[1]);
+        if (matched.length == 16) {
+            setTimeout(gameOver.winner, 1400)
+        }
+    } else {
+        // NEGATIVE MATCH
+        card.classList.add('match');
+
+        setTimeout(function () {
+            revealed.classList.add('shake');
+            card.classList.add('shake');
+            card.addEventListener('animationend', animationendCallback)
+        }, 400);
+    }
+    
+    clickable = false;
+    glance = [];
+    addMove();
+}
 
 
 // MOVES COUNTER ==================================================================
