@@ -140,10 +140,10 @@ function match(card) {
             card.classList.add('tada');
             revealed.classList.add('tada');
             card.addEventListener('animationend', animationendCallback)
-        }, 300);
+        }, 100);
         matched.push(card.id, glance[1]);
         if (matched.length == 16) {
-            setTimeout(gameOver.winner, 1400)
+            setTimeout(gameOver.winner, 1000)
         }
     } else {
         // NEGATIVE MATCH
@@ -153,7 +153,7 @@ function match(card) {
             revealed.classList.add('shake');
             card.classList.add('shake');
             card.addEventListener('animationend', animationendCallback)
-        }, 400);
+        }, 100);
     }
     
     clickable = false;
